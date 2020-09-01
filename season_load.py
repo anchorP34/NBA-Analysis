@@ -5,6 +5,17 @@ def season_load(season):
     """
         This will load all of the main contents of all the games that have a box score
         and return an array of dictionaries for each game
+
+
+    Game Dictionary Example:
+    {
+    'date': 'Tue, Oct 22, 2019',
+    'away_team': {'Name': 'New Orleans Pelicans', 'Abbreviation': 'NOP'},
+    'home_team': {'Name': 'Toronto Raptors', 'Abbreviation': 'TOR'},
+    'boxscore_url': '/boxscores/201910220TOR.html',
+    'pbp_url': '/boxscores/pbp/201910220TOR.html'
+     }
+
     """
     print("\n\n\n\n{} season is loading...\n\n\n\n".format(season))
     season_games = []
