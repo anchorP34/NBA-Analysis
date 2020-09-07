@@ -1,19 +1,21 @@
 -- Let's set up Dimension Table for game info
-drop table if exists calendar;
-create table calendar
+drop table if exists DimCalendar;
+create table DimCalendar
 (
-    ID INTEGER PRIMARY KEY 
+    DimCalendarID INTEGER PRIMARY KEY 
     , Date TEXT NOT NULL
     , DayOfWeek INTEGER NOT NULL
+    , DayOfWeekString TEXT not null
     , Month INTEGER NOT NULL
     , DayOfMonth INTEGER NOT NULL
     , Year INTEGER NOT NULL
 );
 
-INSERT INTO calendar
+INSERT INTO DimCalendar
 (
     Date
     , DayOfWeek
+    , DayOfWeekString
     , Month
     , DayOfMonth
     , Year
@@ -27,6 +29,14 @@ select distinct Date
         when Date like 'Fri%' then 5
         when Date like 'Sat%' then 6
  end as DayOfWeek
+ , case when Date like 'Sun%' then 'Sun'
+        when Date like 'Mon%' then 'Mon'
+        when Date like 'Tue%' then 'Tue'
+        when Date like 'Wed%' then 'Wed'
+        when Date like 'Thu%' then 'Thu'
+        when Date like 'Fri%' then 'Fri'
+        when Date like 'Sat%' then 'Sat'
+ end as DayOfWeekString
 , case when Date like '%Jan%' then 1
         when Date like '%Feb%' then 2
         when Date like '%Mar%' then 3
@@ -79,5 +89,5 @@ from game_info;
 
 
 select *
-from calendar
+from DimCalendar
 limit 10;

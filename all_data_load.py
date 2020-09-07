@@ -18,7 +18,8 @@ class all_data_load():
     
 
         final_df = pd.DataFrame(columns = ['Period','Time','Posession','Points','Score','Main Player','Secondary Player','Team'
-                                            , 'Playoff Game','Home Main Starter','Home Secondary Starter','Away Main Starter','Away Secondary Starter'])
+                                            , 'Playoff Game','Home Main Starter','Home Secondary Starter'
+                                            ,'Away Main Starter','Away Secondary Starter', 'pbp_url'])
         season_df_data = []
 
         # First, get all the games for the given season

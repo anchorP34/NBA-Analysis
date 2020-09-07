@@ -97,10 +97,13 @@ def game_load(game_dict, home_starting_lineup, away_starting_lineup):
 
     full_df['Playoff Game'] = 1 if "Series Summary" in game_request.text else 0
 
-    full_df['Home Main Starter'] = full_df['Main Player'].apply(lambda x: 1 if x in home_starting_lineup else 0)
-    full_df['Home Secondary Starter'] = full_df['Secondary Player'].apply(lambda x: 1 if x in home_starting_lineup else 0)
+    full_df['Main Player Starter'] = full_df['Main Player'].apply(lambda x: 1 if x in home_starting_lineup or x in away_starting_lineup else 0)
+    full_df['Secondary Player Starter'] = full_df['Secondary Player'].apply(lambda x: 1 if x in home_starting_lineup or x in away_starting_lineup else 0)
+    
+    #full_df['Home Main Starter'] = full_df['Main Player'].apply(lambda x: 1 if x in home_starting_lineup else 0)
+    #full_df['Home Secondary Starter'] = full_df['Secondary Player'].apply(lambda x: 1 if x in home_starting_lineup else 0)
 
-    full_df['Away Main Starter'] = full_df['Main Player'].apply(lambda x: 1 if x in away_starting_lineup else 0)
-    full_df['Away Secondary Starter'] = full_df['Main Player'].apply(lambda x: 1 if x in away_starting_lineup else 0)
-
+    #full_df['Away Main Starter'] = full_df['Main Player'].apply(lambda x: 1 if x in away_starting_lineup else 0)
+    #full_df['Away Secondary Starter'] = full_df['Main Player'].apply(lambda x: 1 if x in away_starting_lineup else 0)
+    full_df['pbp_url'] = game_url
     return full_df
