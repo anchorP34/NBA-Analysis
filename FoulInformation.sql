@@ -1,3 +1,6 @@
+create view foul_information
+AS
+
 with all_players as
 (
     -- Find all of the starters for each game
@@ -9,6 +12,18 @@ with all_players as
     where [Main Player] != ''
     group by pbp_url
     , [Main Player]
+
+    UNION
+
+    SELECT pbp_url
+    , [Secondary Player] as Player
+    , case when max(cast([Secondary Player Starter] as integer)) = 1 
+        then 1 else 0 end as IsStarter
+    from nba_play_by_play
+    where [Secondary Player] != ''
+    group by pbp_url
+    , [Secondary Player]
+
 )
 , avail_periods as 
 (
@@ -56,6 +71,7 @@ with all_players as
 
 select dg.DimGameID
 , r.Player
+, r.Period
 , r.IsStarter
 , r.Fouls
 , sum(r.Fouls) over (partition by r.pbp_url, r.Player order by Period) as RollingFoulCount
@@ -63,5 +79,12 @@ select dg.DimGameID
 from results r
 join final_game_fouls f on f.pbp_url = r.pbp_url
                         and f.Player = r.Player
-join DimGame dg on 'https://www.basketball-reference.com' || dg.PlayByPlayURL = r.pbp_url
-where r.IsStarter = 1
+join DimGame dg on dg.PlayByPlayURL = r.pbp_url
+--where r.IsStarter = 1
+;
+
+
+select *
+from foul_information
+where IsStarter = 1
+limit 10;
