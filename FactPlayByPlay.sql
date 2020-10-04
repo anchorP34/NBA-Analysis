@@ -1,3 +1,8 @@
+drop view if exists FactPlayByPlay;
+
+create view FactPlayByPlay
+AS
+
 select dg.DimGameID
 , cast(nba_pbp.[Index] as integer) as GameIndex
 , DimTeamID_Away
@@ -71,4 +76,9 @@ inner join DimTeam away_team on away_team.DimTeamID = dg.DimTeamID_Away
 where dp.IsOvertime = 0 -- Look for Quarters 1-4
 order by dg.DimGameID
     , GameIndex
-limit 100;
+--limit 100;
+
+
+select *
+from FactPlayByPlay
+limit 10;
