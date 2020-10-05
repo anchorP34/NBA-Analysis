@@ -90,7 +90,7 @@ from games;
 
 /*
 =======================================
-SECTION: Joins
+SECTION: INNER Joins
 ======================================= 
 Description: Which day of the week had
 the most number of games?
@@ -113,6 +113,29 @@ from game_info game
 inner join DimCalendar dc on game.Date = dc.Date
 group by dc.DayOfWeekString
 order by count(*) desc;
+
+
+/*
+=======================================
+SECTION: Left Joins
+======================================= 
+Description: 
+
+======================================= 
+======================================= 
+*/
+
+
+/*
+=======================================
+SECTION: FULL OUTTER JOIN
+======================================= 
+Description: Both tables show values
+that did and did not match
+
+======================================= 
+======================================= 
+*/
 
 
 /*
