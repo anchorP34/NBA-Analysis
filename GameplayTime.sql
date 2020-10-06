@@ -18,8 +18,26 @@ Some notes about finding when a player enters or exits:
 
 */
 
-create view game_play_time 
-AS
+drop view game_play_time ;
+
+create table game_play_time 
+(
+    ID INTEGER PRIMARY KEY
+    , DimGameID integer
+    , Player TEXT
+    , StartingTime integer
+    , EndingTime integer
+    , TotalTime integer
+);
+
+INSERT INTO game_play_time
+(
+    DimGameID
+    , Player
+    , StartingTime
+    , EndingTime
+    , TotalTime
+)
 
 with starting_players AS
 (

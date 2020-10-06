@@ -119,11 +119,32 @@ order by count(*) desc;
 =======================================
 SECTION: Left Joins
 ======================================= 
-Description: 
+Description: Left joins have a main table 
+and a secondary table. If the join criteria 
+from the seondary table matches, it will show
+in the results. If it does not match, those values
+will come up as NULL
+
+Example: Are there any "players" who got a foul
+that are not in the players table?
 
 ======================================= 
 ======================================= 
 */
+
+select *
+from foul_information
+limit 10;
+
+select *
+from DimPlayer
+limit 10;
+
+
+select *
+from foul_information fi
+left join DimPlayer dp on dp.PlayerURL = fi.Player
+where dp.ID is NULL;
 
 
 /*
@@ -131,7 +152,9 @@ Description:
 SECTION: FULL OUTTER JOIN
 ======================================= 
 Description: Both tables show values
-that did and did not match
+that did and did not match. You can see
+NULL values in both the left and right 
+tables.
 
 ======================================= 
 ======================================= 
@@ -167,3 +190,15 @@ group by MainPlayer
 having count(distinct DimGameID) >= 50
 order by count(distinct DimGameID) desc;
 
+/*
+=======================================
+SECTION: 
+======================================= 
+Description: 
+
+======================================= 
+======================================= 
+*/
+
+select *
+from nba_players;

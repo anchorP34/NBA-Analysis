@@ -64,8 +64,14 @@ select dg.DimGameID
 , case when Posession like '%assist%' then 1 else 0 end as AssistOnPosession
 , case when Points != '' then cast(substr( Points, 2, 1 ) as integer) else 0 end as Points
 , case when Posession like '%free throw%' then 1 else 0 end as FreeThrow
-, case when Posession like '%foul%' and Posession not like '%tech%' then 1 else 0 end as PersonalFoul
-, case when Posession like '%foul%' and Posession like '%tech%' then 1 else 0 end as TechnicalFoul
+, case when Posession like '%foul%' 
+        and Posession not like '%tech%' 
+        and Posession not like '%turnover%'
+        then 1 else 0 end as PersonalFoul
+, case when Posession like '%foul%' 
+        and Posession like '%tech%' 
+        and Posession not like '%turnover%'
+        then 1 else 0 end as TechnicalFoul
 , case when Posession like '%timeout%' then 1 else 0 end as Timeout
 , case when Posession like '%enters the game%' then 1 else 0 end as Substitution
 from nba_play_by_play nba_pbp
