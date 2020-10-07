@@ -18,7 +18,7 @@ Some notes about finding when a player enters or exits:
 
 */
 
-drop view game_play_time ;
+drop table if exists game_play_time ;
 
 create table game_play_time 
 (
@@ -342,3 +342,10 @@ from cleaned_data
 where PosessionType = 'Entering Game'
 and Player not like '/coaches/%'
 --order by Player, StartingTime desc
+
+
+select *
+from game_play_time
+where DimGameID = 1
+and Player = '/players/a/alexani01.html'
+limit 10;

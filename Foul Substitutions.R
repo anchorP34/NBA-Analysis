@@ -73,5 +73,9 @@ foul.substituions %>%
   summarize( count = n()
             , sub_pct = mean(ImmediateSub)) %>% 
   ggplot(mapping = aes(x = Period, y = sub_pct, fill = QualifyingFoulTrouble)) +
-  geom_bar(stat = 'identity', position = 'dodge')
-
+  geom_bar(stat = 'identity', position = 'dodge') +
+  ylab('Substitution Percentage') + labs(fill = "Qualifying Foul Trouble") +
+scale_y_continuous(labels = scales::percent) +
+  theme(text = element_text(size=20),
+        axis.text.x = element_text(face="bold",size=20),
+        axis.text.y = element_text(face="bold",size=20))
