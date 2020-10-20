@@ -78,4 +78,5 @@ foul.substituions %>%
 scale_y_continuous(labels = scales::percent) +
   theme(text = element_text(size=20),
         axis.text.x = element_text(face="bold",size=20),
-        axis.text.y = element_text(face="bold",size=20))
+        axis.text.y = element_text(face="bold",size=20)) +
+  theme(legend.position="top")
